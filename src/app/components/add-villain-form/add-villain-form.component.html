@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="alert-success" role="alert"></div>
+  <div class="row bg-dark">
+    <h1 class="text-white text-center">Agrega un villano nuevo</h1>
+  </div>
+  <div class="row bg-white">
+    <div class="col-8">
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)= onSubmit()
+      >
+        <div class="col-10 p-3">
+          <label for="name" class="form-label">Nombre:</label>
+          <input
+            type="text"
+            class="form-control ml-2"
+            id="villainNameInput"
+            formControlName="name"
+            [ngClass]="{ 'is-invalid': nameControl.invalid && nameControl.touched}"
+             >
+             <div *ngIf="nameControl.hasError('required')" class="invalid-feedback">Por favor, especifica un nombre.</div>
+        </div>
+        <div class="col-10 p-3">
+          <label for="phrase" class="form-label">Frase:</label>
+          <input
+            type="text"
+            class="form-control ml-2"
+            id="phraseInput"
+            formControlName="phrase"
+            [ngClass]="{ 'is-invalid' : phraseControl.invalid && phraseControl.touched}"
+            >
+            <div *ngIf="phraseControl.hasError('minlength')" class="invalid-feedback">La frase debe ser de al menos 10 caracteres.</div>
+            <div *ngIf="phraseControl.hasError('required')" class="invalid-feedback">Un villano necesita una frase de poder!</div>
+        </div>
+        <div class="col-10 p-3">
+          <label for="objective" class="form-label">Objetivo:</label>
+          <textarea
+            type="text"
+            class="form-control ml-2"
+            id="objectiveInput"
+            formControlName="objective"
+            [ngClass] = "{ 'is-invalid': objectiveControl.invalid && objectiveControl.touched}"
+            ></textarea>
+            <div *ngIf="objectiveControl.hasError('minlength') || objectiveControl.hasError('maxlength')" class="invalid-feedback">Por favor especifica un objetivo valido (25-100 caracteres).</div>
+            <div *ngIf="objectiveControl.hasError('required')" class="invalid-feedback">Necesitas especificarle a tu villano su mision</div>
+        </div>
+        <div class="col-10 p-3">
+          <select
+            class="form-select"
+            formControlName="version"
+            (change)="onVersionChange($event)"
+            >
+            <option *ngFor="let version of versions">{{version.name}}</option>
+          </select>
+        </div>
+        <div class="col-12 px-3">
+         <button type="submit" class="btn btn-secondary mt-2 mb-3">Guardar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <img src="{{selectedVersion.image}}" alt="" class="card-img-top mt-3" style="max-height: 27rem;">
+    </div>
+  </div>
+
+</div>

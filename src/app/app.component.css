@@ -1,0 +1,5 @@
+.background{
+  min-height: 100vh;
+  background: rgb(74,138,33);
+  background: linear-gradient(0deg, rgba(74,138,33,1) 0%, rgba(6,61,16,1) 100%);
+}
